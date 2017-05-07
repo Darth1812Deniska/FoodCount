@@ -2,8 +2,8 @@ object AddUserForm: TAddUserForm
   Left = 0
   Top = 0
   Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103
-  ClientHeight = 409
-  ClientWidth = 381
+  ClientHeight = 368
+  ClientWidth = 387
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,14 +11,13 @@ object AddUserForm: TAddUserForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object grpAddInfo: TGroupBox
     Left = 8
     Top = 8
     Width = 153
-    Height = 393
+    Height = 352
     Caption = #1042#1074#1086#1076' '#1087#1072#1088#1072#1084#1077#1090#1088#1086#1074
     TabOrder = 0
     object lblActKof: TLabel
@@ -56,16 +55,9 @@ object AddUserForm: TAddUserForm
       Height = 13
       Caption = #1042#1077#1089
     end
-    object lblChProts: TLabel
-      Left = 3
-      Top = 314
-      Width = 109
-      Height = 13
-      Caption = #1041#1077#1083#1082#1086#1074' '#1085#1072' '#1084#1072#1089#1089#1091' '#1090#1077#1083#1072
-    end
     object btnSolve: TButton
-      Left = 75
-      Top = 360
+      Left = 73
+      Top = 314
       Width = 75
       Height = 25
       Caption = #1056#1072#1089#1089#1095#1080#1090#1072#1090#1100
@@ -133,38 +125,12 @@ object AddUserForm: TAddUserForm
         #1046#1077#1085#1089#1082#1080#1081)
       TabOrder = 1
     end
-    object cbbProt: TComboBox
-      Left = 3
-      Top = 333
-      Width = 145
-      Height = 21
-      ItemIndex = 0
-      TabOrder = 7
-      Text = '1'
-      Items.Strings = (
-        '1'
-        '1,1'
-        '1,2'
-        '1,3'
-        '1,4'
-        '1,5'
-        '1,6'
-        '1,7'
-        '1,8'
-        '1,9'
-        '2,0'
-        '2,1'
-        '2,2'
-        '2,3'
-        '2,4'
-        '2,5')
-    end
   end
   object grpResults: TGroupBox
-    Left = 171
+    Left = 167
     Top = 8
     Width = 202
-    Height = 393
+    Height = 352
     Caption = #1042#1072#1096#1080' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1099
     TabOrder = 1
     object lblBaseCalories: TLabel
@@ -190,40 +156,32 @@ object AddUserForm: TAddUserForm
     end
     object lblProteins: TLabel
       Left = 3
-      Top = 200
+      Top = 154
       Width = 30
       Height = 13
       Caption = #1041#1077#1083#1082#1080
     end
     object lblFats: TLabel
       Left = 3
-      Top = 246
+      Top = 200
       Width = 30
       Height = 13
       Caption = #1046#1080#1088#1099
     end
     object lblCarbons: TLabel
       Left = 3
-      Top = 292
+      Top = 246
       Width = 51
       Height = 13
       Caption = #1059#1075#1083#1077#1074#1086#1076#1099
     end
-    object lblCalsOnNutr: TLabel
-      Left = 3
-      Top = 154
-      Width = 156
-      Height = 13
-      Caption = #1054#1073#1098#1077#1084' '#1082#1072#1083#1086#1088#1080#1081' '#1087#1086' '#1085#1091#1090#1088#1080#1077#1085#1090#1072#1084
-    end
     object btnSaveResults: TButton
-      Left = 64
-      Top = 360
+      Left = 58
+      Top = 314
       Width = 135
       Height = 25
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1099
-      TabOrder = 7
-      OnClick = btnSaveResultsClick
+      TabOrder = 6
     end
     object edtBaseCalories: TEdit
       Left = 3
@@ -248,31 +206,24 @@ object AddUserForm: TAddUserForm
     end
     object edtProteins: TEdit
       Left = 3
+      Top = 173
+      Width = 121
+      Height = 21
+      TabOrder = 3
+    end
+    object edtFats: TEdit
+      Left = 3
       Top = 219
       Width = 121
       Height = 21
       TabOrder = 4
     end
-    object edtFats: TEdit
+    object edtCarbons: TEdit
       Left = 3
       Top = 265
       Width = 121
       Height = 21
       TabOrder = 5
-    end
-    object edtCarbons: TEdit
-      Left = 3
-      Top = 311
-      Width = 121
-      Height = 21
-      TabOrder = 6
-    end
-    object edtCalsOnNutr: TEdit
-      Left = 3
-      Top = 173
-      Width = 121
-      Height = 21
-      TabOrder = 3
     end
   end
   object conMSSQL: TADOConnection

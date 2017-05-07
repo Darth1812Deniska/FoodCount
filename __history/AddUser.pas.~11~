@@ -49,18 +49,18 @@ type
     Name: string;
     Sex: Integer;
     Age: Integer;
-    Weight: Extended;
-    Height: Extended;
-    ActKof: Extended;
-    BaseCalories: Extended;
-    ResCal: Extended;
-    CalWLossMin: Extended;
-    CalWLossMax: Extended;
-    Proteins:Extended;
-    Fats: Extended;
-    Carbons: Extended;
-    CalOnNutr: Extended;
-    ProtsForWeight: Extended;
+    Weight: Real;
+    Height: Real;
+    ActKof: Real;
+    BaseCalories: Real;
+    ResCal: Real;
+    CalWLossMin: Real;
+    CalWLossMax: Real;
+    Proteins:Real;
+    Fats: Real;
+    Carbons: Real;
+    CalOnNutr: Real;
+    ProtsForWeight: Real;
     FormatSettings : TFormatSettings;
   public
     { Public declarations }
@@ -111,59 +111,44 @@ begin
     FloatToStr(CalWLossMax, FormatSettings)+' '+
   ')';
   qryMSSQL.SQL.Text:=SQLText;
-  try
-    qryMSSQL.ExecSQL;
-    ShowMessage('ƒанные сохраненны');
-  except on E:Exception do
-    begin
-      ShowMessage('ќшибка при сохранении данных: '+ e.Message);
-    end;
-  end;
-
+  qryMSSQL.ExecSQL;
 end;
 
 procedure TAddUserForm.btnSolveClick(Sender: TObject);
 var
-  Err: Boolean;
+  NutrPercentMin:Real;
+  NutrPercentMax:Real;
   NutrPercent:Real;
 begin
   Name:= edtName.Text;
   Sex:= rgSex.ItemIndex;
-  Err:= not TryStrToFloat(edtWeight.Text, Weight);
-  if not Err then
-    Err:= not  TryStrToFloat( edtHeight.Text, Height );
-  if not Err then
-    Err:= not  TryStrToInt( edtAge.Text, Age );
-  if not Err then
-    Err:= not  TryStrToFloat(cbbActKof.Text, ActKof);
-  if not Err then
-    Err:= not  TryStrToFloat( cbbProt.Text, ProtsForWeight );
-  if not Err then
-    begin
-      if Sex = 0 then
-      BaseCalories:= 66.47 + 13.75 * Weight + 5 * Height - 6.74 * Age;
-      if Sex = 1 then
-      BaseCalories:= 655.1 + 9.6 * Weight + 1.85 * Height - 4.68 * Age;
-      ResCal:=BaseCalories * ActKof;
-      CalWLossMin:= 0.75 * ResCal;
-      CalWLossMax:= 0.8 * ResCal;
-      Proteins:= Weight * ProtsForWeight;
-      NutrPercent:=Proteins / 30;
-      Fats:= NutrPercent * 20;
-      Carbons:= NutrPercent * 50;
-      CalOnNutr:= Round( 9.3 * Fats + 4.1 * Carbons + 3.8 * Proteins);
-      Proteins:= Round ( Proteins);
-      Fats:= Round( Fats );
-      Carbons:= Round ( Carbons );
-      edtBaseCalories.Text:= FloatToStr(BaseCalories);
-      edtRequiredCal.Text:= FloatToStr( ResCal );
-      edtWLoss.Text:= FloatToStr(CalWLossMin)+' Ч '+FloatToStr(CalWLossMax);
-      edtCalsOnNutr.Text:= FloatToStr(CalOnNutr);
-      edtProteins.Text:=FloatToStr(Proteins);
-      edtFats.Text:= FloatToStr(Fats);
-      edtCarbons.Text:=FloatToStr(Carbons);
-    end;
-
+  Weight:= StrToFloat( edtWeight.Text );
+  Height:= StrToFloat( edtHeight.Text );
+  Age:= StrToInt( edtAge.Text );
+  ActKof := StrToFloat( cbbActKof.Text );
+  ProtsForWeight:= StrToFloat(cbbProt.Text);
+  if Sex = 0 then
+  BaseCalories:= 66.47 + 13.75 * Weight + 5 * Height - 6.74 * Age;
+  if Sex = 1 then
+  BaseCalories:= 655.1 + 9.6 * Weight + 1.85 * Height - 4.68 * Age;
+  ResCal:=BaseCalories * ActKof;
+  CalWLossMin:= 0.75 * ResCal;
+  CalWLossMax:= 0.8 * ResCal;
+  Proteins:= Weight * ProtsForWeight;
+  NutrPercent:=Proteins / 30;
+  Fats:= NutrPercent * 20;
+  Carbons:= NutrPercent * 50;
+  CalOnNutr:= Round( 9.3 * Fats + 4.1 * Carbons + 3.8 * Proteins);
+  Proteins:= Round ( Proteins);
+  Fats:= Round( Fats );
+  Carbons:= Round ( Carbons );
+  edtBaseCalories.Text:= FloatToStr(BaseCalories);
+  edtRequiredCal.Text:= FloatToStr( ResCal );
+  edtWLoss.Text:= FloatToStr(CalWLossMin)+' Ч '+FloatToStr(CalWLossMax);
+  edtCalsOnNutr.Text:= FloatToStr(CalOnNutr);
+  edtProteins.Text:=FloatToStr(Proteins);
+  edtFats.Text:= FloatToStr(Fats);
+  edtCarbons.Text:=FloatToStr(Carbons);
 end;
 
 procedure TAddUserForm.FormCreate(Sender: TObject);
