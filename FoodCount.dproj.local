@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.563,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.pas=C:\Users\den93\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.497,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\AddUser.pas=C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.410,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\FoodCount.dproj=C:\Users\den93\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.563,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.dfm=C:\Users\den93\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.036,=C:\Users\den93\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.497,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\AddUser.dfm=C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

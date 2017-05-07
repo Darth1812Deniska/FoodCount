@@ -1,0 +1,41 @@
+unit AddUser;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Data.Win.ADODB,
+  Vcl.ExtCtrls;
+
+type
+  TAddUserForm = class(TForm)
+    conMSSQL: TADOConnection;
+    lblName: TLabel;
+    edtName: TEdit;
+    lblAge: TLabel;
+    edtAge: TEdit;
+    lblWeight: TLabel;
+    edtWeight: TEdit;
+    lblHeight: TLabel;
+    edtHeight: TEdit;
+    btnSolve: TButton;
+    lblActKof: TLabel;
+    cbbActKof: TComboBox;
+    rgSex: TRadioGroup;
+    grpAddInfo: TGroupBox;
+    grpResults: TGroupBox;
+    btnSaveResults: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  AddUserForm: TAddUserForm;
+
+implementation
+
+{$R *.dfm}
+
+end.
