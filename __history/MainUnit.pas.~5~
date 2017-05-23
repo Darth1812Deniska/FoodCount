@@ -3,9 +3,8 @@ unit MainUnit;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.StdCtrls, AddUser, AddFood,   AddGroupFood;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, AddUser, AddFood;
 
 type
   TMainForm = class(TForm)
@@ -15,7 +14,6 @@ type
     procedure btnAddUserClick(Sender: TObject);
     procedure btnAddFoodClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure btnAddFoodGroupClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,11 +30,6 @@ implementation
 procedure TMainForm.btnAddFoodClick(Sender: TObject);
 begin
   AddFoodForm.ShowModal;
-end;
-
-procedure TMainForm.btnAddFoodGroupClick(Sender: TObject);
-begin
-  AddGroupFoodForm.ShowModal;
 end;
 
 procedure TMainForm.btnAddUserClick(Sender: TObject);
