@@ -1,7 +1,7 @@
-object AddFoodForm: TAddFoodForm
+object MainForm: TMainForm
   Left = 0
   Top = 0
-  Caption = 'AddFoodForm'
+  Caption = 'MainForm'
   ClientHeight = 201
   ClientWidth = 447
   Color = clBtnFace
@@ -11,7 +11,6 @@ object AddFoodForm: TAddFoodForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
 end
