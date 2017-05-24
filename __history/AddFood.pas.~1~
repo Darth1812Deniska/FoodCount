@@ -1,15 +1,13 @@
-unit AddGroupFood;
+unit AddFood;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
 
 type
-  TAddGroupFoodForm = class(TForm)
-    lbledtGroupName: TLabeledEdit;
-    btnAddGroup: TButton;
+  TAddFoodForm = class(TForm)
   private
     { Private declarations }
   public
@@ -17,7 +15,7 @@ type
   end;
 
 var
-  AddGroupFoodForm: TAddGroupFoodForm;
+  AddFoodForm: TAddFoodForm;
 
 implementation
 

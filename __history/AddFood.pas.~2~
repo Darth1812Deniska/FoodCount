@@ -1,0 +1,33 @@
+unit AddFood;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TAddFoodForm = class(TForm)
+    lbledtFoodName: TLabeledEdit;
+    lbledtProts: TLabeledEdit;
+    lbledtFats: TLabeledEdit;
+    lbledtCarbons: TLabeledEdit;
+    lbledtKCal: TLabeledEdit;
+    cbbFoodGroup: TComboBox;
+    lblFoodGroup: TLabel;
+    btnAddFood: TButton;
+    rgRatio: TRadioGroup;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  AddFoodForm: TAddFoodForm;
+
+implementation
+
+{$R *.dfm}
+
+end.

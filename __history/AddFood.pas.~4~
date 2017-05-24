@@ -21,14 +21,12 @@ type
     conMSSQL: TADOConnection;
     cmdMSSQL: TADOCommand;
     procedure btnAddFoodClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
   private
     Name:string;
     Prots: Double;
     Fats: Double;
     Carbons: Double;
     Cals: Double;
-    FormatSettings : TFormatSettings;
   public
     { Public declarations }
   end;
@@ -68,19 +66,13 @@ begin
     'Carbons, '+
     'Cals ) '+
   'VALUES '+
-  '( '''+Name+''', '+
-  '  '+ FloatToStr(Prots, FormatSettings) +', '+
-  '  '+ FloatToStr(Fats, FormatSettings) +', '+
-  ' '+ FloatToStr(Carbons, FormatSettings) +', '+
-  ' '+ FloatToStr(Cals, FormatSettings) +' )';
+  '( ''Гречка'', '+
+  '  1, '+
+  '  1, '+
+  ' 1, '+
+  ' 1 )';
   cmdMSSQL.CommandText:=SQLText;
   cmdMSSQL.Execute;
-end;
-
-procedure TAddFoodForm.FormCreate(Sender: TObject);
-begin
-  GetLocaleFormatSettings(LOCALE_SYSTEM_DEFAULT, FormatSettings);
-  FormatSettings.DecimalSeparator:='.';
 end;
 
 end.

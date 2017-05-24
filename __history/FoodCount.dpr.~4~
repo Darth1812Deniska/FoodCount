@@ -4,8 +4,7 @@ uses
   Vcl.Forms,
   AddUser in 'AddUser.pas' {AddUserForm},
   AddFood in 'AddFood.pas' {AddFoodForm},
-  MainUnit in 'MainUnit.pas' {MainForm},
-  AddGroupFood in 'AddGroupFood.pas' {AddGroupFoodForm};
+  MainUnit in 'MainUnit.pas' {MainForm};
 
 {$R *.res}
 
@@ -15,6 +14,5 @@ begin
   Application.CreateForm(TMainForm, MainForm);
   Application.CreateForm(TAddUserForm, AddUserForm);
   Application.CreateForm(TAddFoodForm, AddFoodForm);
-  Application.CreateForm(TAddGroupFoodForm, AddGroupFoodForm);
   Application.Run;
 end.
