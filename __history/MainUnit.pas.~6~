@@ -12,7 +12,6 @@ type
     btnAddUser: TButton;
     btnAddFoodGroup: TButton;
     btnAddFood: TButton;
-    btnCalcul: TButton;
     procedure btnAddUserClick(Sender: TObject);
     procedure btnAddFoodClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
