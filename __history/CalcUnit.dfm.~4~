@@ -1,7 +1,7 @@
 object CalculateForm: TCalculateForm
   Left = 0
   Top = 0
-  Caption = #1060#1086#1088#1084#1072' '#1087#1086#1076#1089#1095#1077#1090#1072
+  Caption = 'CalculateForm'
   ClientHeight = 472
   ClientWidth = 778
   Color = clBtnFace
@@ -270,9 +270,9 @@ object CalculateForm: TCalculateForm
     object lblUsers: TLabel
       Left = 3
       Top = 19
-      Width = 72
+      Width = 37
       Height = 13
-      Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100
+      Caption = 'lblUsers'
     end
     object lblUserCal: TLabel
       Left = 3

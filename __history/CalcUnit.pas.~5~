@@ -73,9 +73,8 @@ type
     procedure AddCarbonProducts;
     procedure AddProteinProducts;
     procedure AddFatProducts;
-    procedure AddProduct(SQLText: string; ProductList: TListBox;
+    procedure AddProduct(SQLText: string; ProductList:TListBox;
       ProductArray: ProdInfoArr);
-    procedure AddUserInfo;
   public
     CarbonsProductArray: ProdInfoArr;
     ProtsProductArray: ProdInfoArr;

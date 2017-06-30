@@ -77,6 +77,5 @@ object MainForm: TMainForm
     ParentFont = False
     TabOrder = 3
     WordWrap = True
-    OnClick = btnCalculClick
   end
 end
