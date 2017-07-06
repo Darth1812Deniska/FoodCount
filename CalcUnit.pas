@@ -103,12 +103,12 @@ type
     imgProts: TImage;
     imgFats: TImage;
     imgProduct: TImage;
-    procedure FormCreate(Sender: TObject);
     procedure cbbUsersChange(Sender: TObject);
     procedure btnAddCarbonsClick(Sender: TObject);
     procedure lstDayMenuClick(Sender: TObject);
     procedure btnAddProtClick(Sender: TObject);
     procedure btnAddFatsClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
 
 
   private
@@ -129,6 +129,7 @@ type
     procedure ShowProductColor(iSelectedProduct: Integer);
     procedure AddProductToDayMenu(NutrProductArray: TProdInfoArr;
       ProductList:TListBox);
+    procedure UpdateDiagrams;
     function CheckIdInArray(ProductID: Integer):Boolean;
   public
     CarbonsProductArray: TProdInfoArr;
@@ -146,8 +147,9 @@ implementation
 
 {$R *.dfm}
 
-procedure TCalculateForm.FormCreate(Sender: TObject);
+procedure TCalculateForm.FormShow(Sender: TObject);
 begin
+  lstDayMenu.Items.Clear;
   SetLength(CarbonsProductArray, 0);
   SetLength(ProtsProductArray, 0);
   SetLength(FatsProductArray, 0);
@@ -203,6 +205,7 @@ procedure TCalculateForm.AddProduct(SQLText: string;
 var
   ArrLength: Integer;
 begin
+  ProductList.Items.Clear;
   qryMSSQL.SQL.Text:=SQLText;
   qryMSSQL.Open;
   qryMSSQL.First;
@@ -228,6 +231,7 @@ var
   SQLText: string;
   ArrayLength: Integer;
 begin
+  cbbUsers.Items.Clear;
   SQLText:='SELECT ui.ID, '+
 	   'ui.Name, '+
 	   'ui.Proteins, '+
@@ -311,6 +315,7 @@ begin
       seCarbons.Text:=FloatToStr(DayProductArray[Length(DayProductArray)-1].Carbons );
       seFats.Text:=FloatToStr(DayProductArray[Length(DayProductArray)-1].Fats );
     end;
+    UpdateDiagrams;
   end;
 end;
 
@@ -399,4 +404,37 @@ begin
   else
   Result:=False;
 end;
+
+procedure TCalculateForm.UpdateDiagrams;
+var
+  i: Integer;
+  CarbonStartWidth: Integer;
+  CarbonRecWidth: Integer;
+  ProtsStartWidth: Integer;
+  ProtsRecWidth: Integer;
+  FatsStartWidth: Integer;
+  FatsRecWidth: Integer;
+  CalsStartWidth: Integer;
+  CalsRecWidth: Integer;
+begin
+  imgCarbons.Canvas.Brush.Color:=clWhite;
+  imgCarbons.Canvas.Pen.Style:=psClear;
+  imgCarbons.Canvas.Rectangle(0,0,imgCarbons.Width, imgCarbons.Height);
+  CarbonStartWidth:=1;
+  for I := 0 to Length(DayProductArray)-1 do
+  begin
+
+    //DayProductArray[i].Prots;
+
+    CarbonRecWidth:= Round((imgCarbons.Width * DayProductArray[i].Carbons) / SelectedUserCarbons);
+    imgCarbons.Canvas.Brush.Color:=DayProductArray[i].Color;
+    imgCarbons.Canvas.Rectangle(CarbonStartWidth, 1, CarbonRecWidth+ CarbonStartWidth, imgCarbons.Height);
+    CarbonStartWidth:=CarbonStartWidth + CarbonRecWidth;
+
+    //DayProductArray[i].Fats;
+    //DayProductArray[i].Cals;
+  end;
+
+end;
+
 end.
