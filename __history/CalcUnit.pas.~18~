@@ -14,12 +14,12 @@ uses
 
 type
   ProductInfo = record
-    ID: Integer;
-    Name: string;
-    Cals: Real;
-    Prots: Real;
-    Carbons: Real;
-    Fats:Real;
+  ID: Integer;
+  Name: string;
+  Cals: Real;
+  Prots: Real;
+  Carbons: Real;
+  Fats:Real;
 end;
 
 type
