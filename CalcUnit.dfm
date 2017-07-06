@@ -42,6 +42,7 @@ object CalculateForm: TCalculateForm
     Width = 34
     Height = 22
     Caption = #8212'>'
+    OnClick = btnAddProtClick
   end
   object btnAddCarbons: TSpeedButton
     Left = 135
@@ -49,6 +50,7 @@ object CalculateForm: TCalculateForm
     Width = 34
     Height = 22
     Caption = #8212'>'
+    OnClick = btnAddCarbonsClick
   end
   object btnAddFats: TSpeedButton
     Left = 135
@@ -56,6 +58,7 @@ object CalculateForm: TCalculateForm
     Width = 34
     Height = 25
     Caption = #8212'>'
+    OnClick = btnAddFatsClick
   end
   object lstCarbons: TListBox
     Left = 8
@@ -123,6 +126,12 @@ object CalculateForm: TCalculateForm
       Height = 13
       Caption = #1046#1080#1088#1099':'
     end
+    object imgProduct: TImage
+      Left = 143
+      Top = 143
+      Width = 42
+      Height = 23
+    end
     object lstDayMenu: TListBox
       Left = 3
       Top = 37
@@ -130,6 +139,7 @@ object CalculateForm: TCalculateForm
       Height = 130
       ItemHeight = 13
       TabOrder = 0
+      OnClick = lstDayMenuClick
     end
     object seGramms: TSpinEdit
       Left = 205
@@ -188,35 +198,35 @@ object CalculateForm: TCalculateForm
     end
     object lblCarbGr: TLabel
       Left = 3
-      Top = 69
+      Top = 100
       Width = 51
       Height = 13
       Caption = #1059#1075#1083#1077#1074#1086#1076#1099
     end
     object lblProtGr: TLabel
       Left = 3
-      Top = 121
+      Top = 183
       Width = 30
       Height = 13
       Caption = #1041#1077#1083#1082#1080
     end
     object gProt: TGauge
       Left = 3
-      Top = 140
+      Top = 202
       Width = 309
       Height = 25
       Progress = 0
     end
     object lblFatGr: TLabel
       Left = 3
-      Top = 171
+      Top = 264
       Width = 30
       Height = 13
       Caption = #1046#1080#1088#1099
     end
     object gFats: TGauge
       Left = 3
-      Top = 190
+      Top = 283
       Width = 309
       Height = 25
       Progress = 0
@@ -230,34 +240,38 @@ object CalculateForm: TCalculateForm
     end
     object gCarbons: TGauge
       Left = 3
-      Top = 90
+      Top = 121
       Width = 309
       Height = 25
       Progress = 0
     end
-    object pbCarbons: TPaintBox
+    object imgCals: TImage
       Left = 3
-      Top = 252
+      Top = 69
       Width = 309
       Height = 25
+      Cursor = crCross
     end
-    object pbProteins: TPaintBox
+    object imgCarbons: TImage
       Left = 3
-      Top = 283
+      Top = 152
       Width = 309
       Height = 25
+      Cursor = crCross
     end
-    object pbFats: TPaintBox
+    object imgProts: TImage
+      Left = 3
+      Top = 233
+      Width = 309
+      Height = 25
+      Cursor = crCross
+    end
+    object imgFats: TImage
       Left = 3
       Top = 314
       Width = 309
       Height = 25
-    end
-    object pbCals: TPaintBox
-      Left = 3
-      Top = 221
-      Width = 309
-      Height = 25
+      Cursor = crCross
     end
   end
   object grpUser: TGroupBox
@@ -308,12 +322,14 @@ object CalculateForm: TCalculateForm
       Width = 145
       Height = 21
       TabOrder = 0
+      OnChange = cbbUsersChange
     end
     object edtUserCals: TEdit
       Left = 3
       Top = 84
       Width = 52
       Height = 21
+      ReadOnly = True
       TabOrder = 1
     end
     object edtUserProteins: TEdit
@@ -321,6 +337,7 @@ object CalculateForm: TCalculateForm
       Top = 84
       Width = 52
       Height = 21
+      ReadOnly = True
       TabOrder = 2
     end
     object edtUserCarbons: TEdit
@@ -328,6 +345,7 @@ object CalculateForm: TCalculateForm
       Top = 130
       Width = 52
       Height = 21
+      ReadOnly = True
       TabOrder = 3
     end
     object edtUserFats: TEdit
@@ -335,6 +353,7 @@ object CalculateForm: TCalculateForm
       Top = 130
       Width = 52
       Height = 21
+      ReadOnly = True
       TabOrder = 4
     end
   end

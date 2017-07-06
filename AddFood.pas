@@ -1,5 +1,9 @@
 unit AddFood;
-
+{!
+================================================================================
+Модуль добавления продуктов в систему
+================================================================================
+!}
 interface
 
 uses
@@ -23,10 +27,15 @@ type
     procedure btnAddFoodClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
+    // Наименование продукта
     Name:string;
+    // Количетво белков на 1 грамм
     Prots: Double;
+    // Количество жиров на 1 грамм
     Fats: Double;
+    // Количество углеводов на 1 грамм
     Carbons: Double;
+    // Калорийность на 1 грамм
     Cals: Double;
     FormatSettings : TFormatSettings;
   public
