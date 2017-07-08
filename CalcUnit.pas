@@ -5,6 +5,7 @@
 ================================================================================
 !}
 
+
 interface
 
 uses
@@ -417,20 +418,49 @@ var
   CalsStartWidth: Integer;
   CalsRecWidth: Integer;
 begin
-  imgCarbons.Canvas.Brush.Color:=clWhite;
+  //убираем окантовку
   imgCarbons.Canvas.Pen.Style:=psClear;
-  imgCarbons.Canvas.Rectangle(0,0,imgCarbons.Width, imgCarbons.Height);
+  imgProts.Canvas.Pen.Style:=psClear;
+  imgFats.Canvas.Pen.Style:=psClear;
+  // закрашиваем прямоугольник белым
+  imgCarbons.Canvas.Brush.Color:=clWhite;
+  imgProts.Canvas.Brush.Color:=clWhite;
+  imgFats.Canvas.Brush.Color:=clWhite;
+  // рисуем белый прямоугольник
+  imgCarbons.Canvas.Rectangle(1,1,imgCarbons.Width-1, imgCarbons.Height-1);
+  imgProts.Canvas.Rectangle(1,1,imgProts.Width-1, imgProts.Height-1);
+  imgFats.Canvas.Rectangle(1,1,imgFats.Width-1, imgFats.Height-1);
+
   CarbonStartWidth:=1;
+  ProtsStartWidth:=1;
+  FatsStartWidth:=1;
   for I := 0 to Length(DayProductArray)-1 do
   begin
 
     //DayProductArray[i].Prots;
-
-    CarbonRecWidth:= Round((imgCarbons.Width * DayProductArray[i].Carbons) / SelectedUserCarbons);
+    // Расчет прямоугольников для углеводов
+    CarbonRecWidth:=
+      Round(((imgCarbons.Width-1) * DayProductArray[i].Carbons) / SelectedUserCarbons);
     imgCarbons.Canvas.Brush.Color:=DayProductArray[i].Color;
-    imgCarbons.Canvas.Rectangle(CarbonStartWidth, 1, CarbonRecWidth+ CarbonStartWidth, imgCarbons.Height);
-    CarbonStartWidth:=CarbonStartWidth + CarbonRecWidth;
+    imgCarbons.Canvas.Rectangle(CarbonStartWidth, 1,
+      CarbonRecWidth + CarbonStartWidth, imgCarbons.Height);
+    CarbonStartWidth := CarbonStartWidth + CarbonRecWidth;
 
+    // Расчет прямоугольников для белков
+    ProtsRecWidth:=
+      Round(( (imgProts.Width-1) * DayProductArray[i].Prots ) / SelectedUserProts );
+    imgProts.Canvas.Brush.Color:= DayProductArray[i].Color;
+    imgProts.Canvas.Rectangle(ProtsStartWidth, 1,
+      ProtsStartWidth + ProtsRecWidth, imgProts.Height);
+    ProtsStartWidth:=ProtsStartWidth+ ProtsRecWidth;
+
+    // Расчет прямоугольников для жиров
+    FatsRecWidth:=
+      Round(( (imgFats.Width-1) * DayProductArray[i].Fats ) / SelectedUserFats );
+    imgFats.Canvas.Brush.Color:= DayProductArray[i].Color;
+    imgFats.Canvas.Rectangle(FatsStartWidth, 1,
+      FatsStartWidth + FatsRecWidth, imgFats.Height);
+    FatsStartWidth:=FatsStartWidth+ FatsRecWidth;
     //DayProductArray[i].Fats;
     //DayProductArray[i].Cals;
   end;
