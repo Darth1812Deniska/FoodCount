@@ -9,8 +9,7 @@
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
-  System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Samples.Spin,
   Vcl.Buttons, Vcl.ExtCtrls, Data.DB, Data.Win.ADODB, Vcl.Samples.Gauges;
 
@@ -114,25 +113,16 @@ type
 
 
   private
-    // ID Выбранного пользователя
+
     SelectedUserID: Integer;
-    // Минимальное количество углеводов потребляемое в день для пользователя
     SelectedMinCals: Real;
-    // Максимальное количество углеводов потребляемых в день для пользователя
     SelectedMaxCals: Real;
-    // Необходимое количество белков для пользователя
     SelectedUserProts:Real;
-    // Необходимое количество углеводов для пользователя
     SelectedUserCarbons: Real;
-    // Необходимое количество жиров для пользователя
     SelectedUserFats: Real;
-    // Добавление продукта в список углеводов
     procedure AddCarbonProducts;
-    // Добавление продукта в список белков
     procedure AddProteinProducts;
-    // Добавление продукта в список жиров
     procedure AddFatProducts;
-    //
     procedure AddProduct(SQLText: string; ProductList: TListBox;
       var ProductArray: TProdInfoArr);
     procedure AddUserInfo;
@@ -140,31 +130,14 @@ type
     procedure ShowProductColor(iSelectedProduct: Integer);
     procedure AddProductToDayMenu(NutrProductArray: TProdInfoArr;
       ProductList:TListBox);
-    // Перерисовка диаграмм
     procedure UpdateDiagrams;
-    // Проверка нахождения продукта в дневном меню
     function CheckIdInArray(ProductID: Integer):Boolean;
-    // Проверка заполненности нормы углеводов
-    function CarbonsIsFull(out SumProductWeigth:Real):Boolean;
-    // Проверка заполненности нормы белков
-    function ProteinsIsFull(out SumProductWeigth:Real):Boolean;
-    // Проверка заполненности нормы жиров
-    function FatsIsFull(out SumProductWeigth:Real):Boolean;
-    // Вычисление оставшейся нормы углеводов
-    function FindCarbonsVestige(SumProductWeigth:Real):Real;
-    // Вычисление оставшейся нормы белков
-    function FindProteinsVestige(SumProductWeigth:Real):Real;
-    // Вычисление оставшейся нормы жиров
-    function FindFatsVestige(SumProductWeigth:Real):Real;
-    // Вычисление оставшейся нормы для любого нутриента
-    function FindProductVestige(MaxProductWeigth:Real; SumProductWeigth:Real):Real;
   public
     CarbonsProductArray: TProdInfoArr;
     ProtsProductArray: TProdInfoArr;
     FatsProductArray: TProdInfoArr;
     UsersInfo: TUserInfoArray;
     DayProductArray: TDayProductArray;
-
 end;
 
 var
@@ -449,119 +422,49 @@ begin
   imgCarbons.Canvas.Pen.Style:=psClear;
   imgProts.Canvas.Pen.Style:=psClear;
   imgFats.Canvas.Pen.Style:=psClear;
-  imgCarbons.Canvas.Pen.Width:=0;
-  imgProts.Canvas.Pen.Width:=0;
-  imgFats.Canvas.Pen.Width:=0;
   // закрашиваем прямоугольник белым
   imgCarbons.Canvas.Brush.Color:=clWhite;
   imgProts.Canvas.Brush.Color:=clWhite;
   imgFats.Canvas.Brush.Color:=clWhite;
   // рисуем белый прямоугольник
-  imgCarbons.Canvas.Rectangle(1,1,imgCarbons.Width, imgCarbons.Height);
-  imgProts.Canvas.Rectangle(1,1,imgProts.Width, imgProts.Height);
-  imgFats.Canvas.Rectangle(1,1,imgFats.Width, imgFats.Height);
+  imgCarbons.Canvas.Rectangle(1,1,imgCarbons.Width-1, imgCarbons.Height-1);
+  imgProts.Canvas.Rectangle(1,1,imgProts.Width-1, imgProts.Height-1);
+  imgFats.Canvas.Rectangle(1,1,imgFats.Width-1, imgFats.Height-1);
 
-  CarbonStartWidth:=2;
-  ProtsStartWidth:=2;
-  FatsStartWidth:=2;
+  CarbonStartWidth:=1;
+  ProtsStartWidth:=1;
+  FatsStartWidth:=1;
   for I := 0 to Length(DayProductArray)-1 do
   begin
 
     //DayProductArray[i].Prots;
     // Расчет прямоугольников для углеводов
     CarbonRecWidth:=
-      Round(((imgCarbons.Width-2) * DayProductArray[i].Carbons) / SelectedUserCarbons);
+      Round(((imgCarbons.Width-1) * DayProductArray[i].Carbons) / SelectedUserCarbons);
     imgCarbons.Canvas.Brush.Color:=DayProductArray[i].Color;
-    imgCarbons.Canvas.Rectangle(CarbonStartWidth-1, 1,
+    imgCarbons.Canvas.Rectangle(CarbonStartWidth, 1,
       CarbonRecWidth + CarbonStartWidth, imgCarbons.Height);
     CarbonStartWidth := CarbonStartWidth + CarbonRecWidth;
 
     // Расчет прямоугольников для белков
     ProtsRecWidth:=
-      Round(( (imgProts.Width-2) * DayProductArray[i].Prots ) / SelectedUserProts );
+      Round(( (imgProts.Width-1) * DayProductArray[i].Prots ) / SelectedUserProts );
     imgProts.Canvas.Brush.Color:= DayProductArray[i].Color;
-    imgProts.Canvas.Rectangle(ProtsStartWidth-1, 1,
+    imgProts.Canvas.Rectangle(ProtsStartWidth, 1,
       ProtsStartWidth + ProtsRecWidth, imgProts.Height);
     ProtsStartWidth:=ProtsStartWidth+ ProtsRecWidth;
 
     // Расчет прямоугольников для жиров
     FatsRecWidth:=
-      Round(( (imgFats.Width-2) * DayProductArray[i].Fats ) / SelectedUserFats );
+      Round(( (imgFats.Width-1) * DayProductArray[i].Fats ) / SelectedUserFats );
     imgFats.Canvas.Brush.Color:= DayProductArray[i].Color;
-    imgFats.Canvas.Rectangle(FatsStartWidth-1, 1,
+    imgFats.Canvas.Rectangle(FatsStartWidth, 1,
       FatsStartWidth + FatsRecWidth, imgFats.Height);
     FatsStartWidth:=FatsStartWidth+ FatsRecWidth;
-
+    //DayProductArray[i].Fats;
+    //DayProductArray[i].Cals;
   end;
 
 end;
 
-function TCalculateForm.CarbonsIsFull(out SumProductWeigth:Real):Boolean;
-var
-  i: Integer;
-begin
-  SumProductWeigth:=0;
-  for I := 0 to Length (DayProductArray) - 1 do
-  begin
-    SumProductWeigth:= SumProductWeigth + DayProductArray[i].Carbons;
-  end;
-  if SumProductWeigth < SelectedUserCarbons then
-    Result:= False
-  else
-    Result:= True;
-end;
-
-function TCalculateForm.ProteinsIsFull(out SumProductWeigth:Real):Boolean;
-var
-  i: Integer;
-begin
-  SumProductWeigth:=0;
-  for I := 0 to Length (DayProductArray) - 1 do
-  begin
-    SumProductWeigth:= SumProductWeigth + DayProductArray[i].Prots;
-  end;
-  if SumProductWeigth < SelectedUserProts then
-    Result:= False
-  else
-    Result:= True;
-end;
-
-function TCalculateForm.FatsIsFull(out SumProductWeigth:Real):Boolean;
-var
-  i: Integer;
-begin
-  SumProductWeigth:=0;
-  for I := 0 to Length (DayProductArray) - 1 do
-  begin
-    SumProductWeigth:= SumProductWeigth + DayProductArray[i].Fats;
-  end;
-  if SumProductWeigth < SelectedUserFats then
-    Result:= False
-  else
-    Result:= True;
-end;
-
-function TCalculateForm.FindCarbonsVestige(SumProductWeigth:Real):Real;
-begin
-  Result:= FindProductVestige(SelectedUserCarbons, SumProductWeigth);
-end;
-
-function TCalculateForm.FindProteinsVestige(SumProductWeigth:Real):Real;
-begin
-    Result:= FindProductVestige(SelectedUserProts, SumProductWeigth);
-end;
-
-function TCalculateForm.FindFatsVestige(SumProductWeigth:Real):Real;
-begin
-  Result:= FindProductVestige(SelectedUserFats, SumProductWeigth);
-end;
-
-function TCalculateForm.FindProductVestige(MaxProductWeigth: Real;
-  SumProductWeigth: Real):Real;
-begin
-  if SumProductWeigth < MaxProductWeigth then
-    Result:= MaxProductWeigth - SumProductWeigth
-  else
-    Result:= 0;
-end;
 end.

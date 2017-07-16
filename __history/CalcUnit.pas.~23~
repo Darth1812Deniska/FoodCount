@@ -145,19 +145,17 @@ type
     // Проверка нахождения продукта в дневном меню
     function CheckIdInArray(ProductID: Integer):Boolean;
     // Проверка заполненности нормы углеводов
-    function CarbonsIsFull(out SumProductWeigth:Real):Boolean;
+    function CarbonsIsFull: Boolean;
     // Проверка заполненности нормы белков
-    function ProteinsIsFull(out SumProductWeigth:Real):Boolean;
+    function ProteinsIsFull: Boolean;
     // Проверка заполненности нормы жиров
-    function FatsIsFull(out SumProductWeigth:Real):Boolean;
-    // Вычисление оставшейся нормы углеводов
-    function FindCarbonsVestige(SumProductWeigth:Real):Real;
-    // Вычисление оставшейся нормы белков
-    function FindProteinsVestige(SumProductWeigth:Real):Real;
-    // Вычисление оставшейся нормы жиров
-    function FindFatsVestige(SumProductWeigth:Real):Real;
-    // Вычисление оставшейся нормы для любого нутриента
-    function FindProductVestige(MaxProductWeigth:Real; SumProductWeigth:Real):Real;
+    function FatsIsFull: Boolean;
+    // Вычисление оставшийся нормы углеводов
+    function FindCarbonsVestige: Real;
+    // Вычисление оставшийся нормы белков
+    function FindProteinsVestige: Real;
+    // Вычисление оставшийся нормы жиров
+    function FindFatsVestige: Real;
   public
     CarbonsProductArray: TProdInfoArr;
     ProtsProductArray: TProdInfoArr;
@@ -496,11 +494,11 @@ begin
 
 end;
 
-function TCalculateForm.CarbonsIsFull(out SumProductWeigth:Real):Boolean;
+function TCalculateForm.CarbonsIsFull:Boolean;
 var
+  SumProductWeigth:Real;
   i: Integer;
 begin
-  SumProductWeigth:=0;
   for I := 0 to Length (DayProductArray) - 1 do
   begin
     SumProductWeigth:= SumProductWeigth + DayProductArray[i].Carbons;
@@ -511,11 +509,11 @@ begin
     Result:= True;
 end;
 
-function TCalculateForm.ProteinsIsFull(out SumProductWeigth:Real):Boolean;
+function TCalculateForm.ProteinsIsFull:Boolean;
 var
+  SumProductWeigth:Real;
   i: Integer;
 begin
-  SumProductWeigth:=0;
   for I := 0 to Length (DayProductArray) - 1 do
   begin
     SumProductWeigth:= SumProductWeigth + DayProductArray[i].Prots;
@@ -526,11 +524,11 @@ begin
     Result:= True;
 end;
 
-function TCalculateForm.FatsIsFull(out SumProductWeigth:Real):Boolean;
+function TCalculateForm.FatsIsFull:Boolean;
 var
+  SumProductWeigth:Real;
   i: Integer;
 begin
-  SumProductWeigth:=0;
   for I := 0 to Length (DayProductArray) - 1 do
   begin
     SumProductWeigth:= SumProductWeigth + DayProductArray[i].Fats;
@@ -541,27 +539,20 @@ begin
     Result:= True;
 end;
 
-function TCalculateForm.FindCarbonsVestige(SumProductWeigth:Real):Real;
+function TCalculateForm.FindCarbonsVestige:Real;
 begin
-  Result:= FindProductVestige(SelectedUserCarbons, SumProductWeigth);
+  // Здесь будет производиться расчет остатка углеводов
 end;
 
-function TCalculateForm.FindProteinsVestige(SumProductWeigth:Real):Real;
+function TCalculateForm.FindProteinsVestige:Real;
 begin
-    Result:= FindProductVestige(SelectedUserProts, SumProductWeigth);
+  // Здесь будет производиться расчет остатка белков
 end;
 
-function TCalculateForm.FindFatsVestige(SumProductWeigth:Real):Real;
+function TCalculateForm.FindFatsVestige;
 begin
-  Result:= FindProductVestige(SelectedUserFats, SumProductWeigth);
+  // Здесь будет производиться расчет остатка жиров
 end;
 
-function TCalculateForm.FindProductVestige(MaxProductWeigth: Real;
-  SumProductWeigth: Real):Real;
-begin
-  if SumProductWeigth < MaxProductWeigth then
-    Result:= MaxProductWeigth - SumProductWeigth
-  else
-    Result:= 0;
-end;
+
 end.

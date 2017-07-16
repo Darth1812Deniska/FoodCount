@@ -114,25 +114,16 @@ type
 
 
   private
-    // ID Выбранного пользователя
+
     SelectedUserID: Integer;
-    // Минимальное количество углеводов потребляемое в день для пользователя
     SelectedMinCals: Real;
-    // Максимальное количество углеводов потребляемых в день для пользователя
     SelectedMaxCals: Real;
-    // Необходимое количество белков для пользователя
     SelectedUserProts:Real;
-    // Необходимое количество углеводов для пользователя
     SelectedUserCarbons: Real;
-    // Необходимое количество жиров для пользователя
     SelectedUserFats: Real;
-    // Добавление продукта в список углеводов
     procedure AddCarbonProducts;
-    // Добавление продукта в список белков
     procedure AddProteinProducts;
-    // Добавление продукта в список жиров
     procedure AddFatProducts;
-    //
     procedure AddProduct(SQLText: string; ProductList: TListBox;
       var ProductArray: TProdInfoArr);
     procedure AddUserInfo;
@@ -140,24 +131,14 @@ type
     procedure ShowProductColor(iSelectedProduct: Integer);
     procedure AddProductToDayMenu(NutrProductArray: TProdInfoArr;
       ProductList:TListBox);
-    // Перерисовка диаграмм
     procedure UpdateDiagrams;
-    // Проверка нахождения продукта в дневном меню
     function CheckIdInArray(ProductID: Integer):Boolean;
-    // Проверка заполненности нормы углеводов
-    function CarbonsIsFull(out SumProductWeigth:Real):Boolean;
-    // Проверка заполненности нормы белков
-    function ProteinsIsFull(out SumProductWeigth:Real):Boolean;
-    // Проверка заполненности нормы жиров
-    function FatsIsFull(out SumProductWeigth:Real):Boolean;
-    // Вычисление оставшейся нормы углеводов
-    function FindCarbonsVestige(SumProductWeigth:Real):Real;
-    // Вычисление оставшейся нормы белков
-    function FindProteinsVestige(SumProductWeigth:Real):Real;
-    // Вычисление оставшейся нормы жиров
-    function FindFatsVestige(SumProductWeigth:Real):Real;
-    // Вычисление оставшейся нормы для любого нутриента
-    function FindProductVestige(MaxProductWeigth:Real; SumProductWeigth:Real):Real;
+    function CarbonsIsFull: Boolean;
+    function ProteinsIsFull: Boolean;
+    function FatsIsFull: Boolean;
+    function FindCarbonsVestige: Real;
+    function FindProteinsVestige: Real;
+    function FindFatsVestige: Real;
   public
     CarbonsProductArray: TProdInfoArr;
     ProtsProductArray: TProdInfoArr;
@@ -496,72 +477,35 @@ begin
 
 end;
 
-function TCalculateForm.CarbonsIsFull(out SumProductWeigth:Real):Boolean;
-var
-  i: Integer;
+function TCalculateForm.CarbonsIsFull:Boolean;
 begin
-  SumProductWeigth:=0;
-  for I := 0 to Length (DayProductArray) - 1 do
-  begin
-    SumProductWeigth:= SumProductWeigth + DayProductArray[i].Carbons;
-  end;
-  if SumProductWeigth < SelectedUserCarbons then
-    Result:= False
-  else
-    Result:= True;
+  // Здесь будет производиться проверка заполненности углеводов
 end;
 
-function TCalculateForm.ProteinsIsFull(out SumProductWeigth:Real):Boolean;
-var
-  i: Integer;
+function TCalculateForm.ProteinsIsFull:Boolean;
 begin
-  SumProductWeigth:=0;
-  for I := 0 to Length (DayProductArray) - 1 do
-  begin
-    SumProductWeigth:= SumProductWeigth + DayProductArray[i].Prots;
-  end;
-  if SumProductWeigth < SelectedUserProts then
-    Result:= False
-  else
-    Result:= True;
+  // Здесь будет производиться проверка заполненности белков
 end;
 
-function TCalculateForm.FatsIsFull(out SumProductWeigth:Real):Boolean;
-var
-  i: Integer;
+function TCalculateForm.FatsIsFull:Boolean;
 begin
-  SumProductWeigth:=0;
-  for I := 0 to Length (DayProductArray) - 1 do
-  begin
-    SumProductWeigth:= SumProductWeigth + DayProductArray[i].Fats;
-  end;
-  if SumProductWeigth < SelectedUserFats then
-    Result:= False
-  else
-    Result:= True;
+  // Здесь будет производиться проверка заполненности жиров
 end;
 
-function TCalculateForm.FindCarbonsVestige(SumProductWeigth:Real):Real;
+function TCalculateForm.FindCarbonsVestige:Real;
 begin
-  Result:= FindProductVestige(SelectedUserCarbons, SumProductWeigth);
+  // Здесь будет производиться расчет остатка углеводов
 end;
 
-function TCalculateForm.FindProteinsVestige(SumProductWeigth:Real):Real;
+function TCalculateForm.FindProteinsVestige:Real;
 begin
-    Result:= FindProductVestige(SelectedUserProts, SumProductWeigth);
+  // Здесь будет производиться расчет остатка белков
 end;
 
-function TCalculateForm.FindFatsVestige(SumProductWeigth:Real):Real;
+function TCalculateForm.FindFatsVestige;
 begin
-  Result:= FindProductVestige(SelectedUserFats, SumProductWeigth);
+  // Здесь будет производиться расчет остатка жиров
 end;
 
-function TCalculateForm.FindProductVestige(MaxProductWeigth: Real;
-  SumProductWeigth: Real):Real;
-begin
-  if SumProductWeigth < MaxProductWeigth then
-    Result:= MaxProductWeigth - SumProductWeigth
-  else
-    Result:= 0;
-end;
+
 end.
