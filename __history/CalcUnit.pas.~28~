@@ -158,14 +158,6 @@ type
     function FindFatsVestige(SumProductWeigth:Real):Real;
     // Вычисление оставшейся нормы для любого нутриента
     function FindProductVestige(MaxProductWeigth:Real; SumProductWeigth:Real):Real;
-    // Вычисление n-ой части от общего количества нутриента
-    function CalculateNutrientNPortion(NutrientWeigth: Real; ProductCount: Integer): Real;
-    // Вычисление n-ой части от всех углеводов
-    function CalculateCarbonNPortion (ProductCount: Integer): Real;
-    // Вычисление n-ой части от всех белков
-    function CalculateProtNPortion (ProductCount: Integer): Real;
-    // Вычисление n-ой части от всех жиров
-    function CalculateFatNPortion (ProductCount: Integer): Real;
   public
     CarbonsProductArray: TProdInfoArr;
     ProtsProductArray: TProdInfoArr;
@@ -316,21 +308,15 @@ begin
       AddProductToDayMenu(CarbonsProductArray, lstCarbons);
       // Расчет добавляемого продукта
       // Проверка на полноту
-      if not CarbonsIsFull(SumProductWeigth) then
-        //если не заполнено все, то вычисляем остаток и n-ую часть
+      if CarbonsIsFull(SumProductWeigth) then
+        //если заполнено все, то добавляем n-ую часть
         begin
           // добавляется n-ая часть от нормы. N - все количество продуктов
-          // Вычисляем количество
           ProductCount:= Length( DayProductArray );
-          // Вычисляем граммовку продукта
           DayProductArray[Length(DayProductArray)-1].Gramms:=
-            SelectedUserCarbons /
-            ( ProductCount * CarbonsProductArray[lstCarbons.ItemIndex].Carbons );
-          // Расчет всех нутриентов
-          // Здесь это лишнее. Нужно расчитать часть нутриента отдельно.
+            SelectedUserCarbons / ( ProductCount * CarbonsProductArray[lstCarbons.ItemIndex].Carbons );
           DayProductArray[Length(DayProductArray)-1].Prots:=
-            CarbonsProductArray[lstCarbons.ItemIndex].Prots *
-            DayProductArray[Length(DayProductArray)-1].Gramms;
+            CarbonsProductArray[lstCarbons.ItemIndex].Prots * DayProductArray[Length(DayProductArray)-1].Gramms;
           DayProductArray[Length(DayProductArray)-1].Carbons:=
             CarbonsProductArray[lstCarbons.ItemIndex].Carbons * DayProductArray[Length(DayProductArray)-1].Gramms;
           DayProductArray[Length(DayProductArray)-1].Fats:=
@@ -594,26 +580,4 @@ begin
   else
     Result:= 0;
 end;
-
-function TCalculateForm.CalculateNutrientNPortion ( NutrientWeigth: Real;
-                                                    ProductCount: Integer): Real;
-begin
-  Result:= NutrientWeigth / ProductCount;
-end;
-
-function TCalculateForm.CalculateCarbonNPortion(ProductCount: Integer): Real;
-begin
-  Result:= CalculateNutrientNPortion( SelectedUserCarbons, ProductCount );
-end;
-
-function TCalculateForm.CalculateProtNPortion(ProductCount: Integer): Real;
-begin
-  Result:= CalculateNutrientNPortion( SelectedUserProts, ProductCount );
-end;
-
-function TCalculateForm.CalculateFatNPortion(ProductCount: Integer): Real;
-begin
-  Result:= CalculateNutrientNPortion( SelectedUserFats, ProductCount );
-end;
-
 end.
