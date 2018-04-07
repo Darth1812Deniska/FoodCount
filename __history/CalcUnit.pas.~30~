@@ -315,60 +315,65 @@ begin
     begin
       AddProductToDayMenu(CarbonsProductArray, lstCarbons);
       // Расчет добавляемого продукта
-      // Вычисляем количество
-      ProductCount:= Length( DayProductArray );
       // Проверка на полноту
       if not CarbonsIsFull(SumProductWeigth) then
         //если не заполнено все, то вычисляем остаток и n-ую часть
         begin
-          // Определяем количество добавляемых углеводов
+          // добавляется n-ая часть от нормы. N - все количество продуктов
+          // Вычисляем количество
+          ProductCount:= Length( DayProductArray );
           if FindCarbonsVestige(SumProductWeigth) >= CalculateCarbonNPortion(ProductCount) then
             DayProductArray[Length(DayProductArray)-1].Carbons:=
               FindCarbonsVestige(SumProductWeigth)
           else
             DayProductArray[Length(DayProductArray)-1].Carbons:=
               CalculateCarbonNPortion(ProductCount);
-        end
-        // Вычисляем при полноте
-      else
-        // если заполнено то n-ую часть
-        begin
+          // Вычисляем граммовку продукта
+          DayProductArray[Length(DayProductArray)-1].Gramms:=
+            SelectedUserCarbons /
+            ( ProductCount * CarbonsProductArray[lstCarbons.ItemIndex].Carbons );
+          // Расчет всех нутриентов
+          // Здесь это лишнее. Нужно расчитать часть нутриента отдельно.
+          DayProductArray[Length(DayProductArray)-1].Prots:=
+            CarbonsProductArray[lstCarbons.ItemIndex].Prots *
+            DayProductArray[Length(DayProductArray)-1].Gramms;
           DayProductArray[Length(DayProductArray)-1].Carbons:=
-              CalculateCarbonNPortion(ProductCount);
-        end;
-      // Вычисляем граммовку продукта
-      DayProductArray[Length(DayProductArray)-1].Gramms:=
-        DayProductArray[Length(DayProductArray)-1].Carbons /
-        CarbonsProductArray[lstCarbons.ItemIndex].Carbons;
-      // Расчет всех нутриентов
-      DayProductArray[Length(DayProductArray)-1].Prots:=
-        CarbonsProductArray[lstCarbons.ItemIndex].Prots *
-        DayProductArray[Length(DayProductArray)-1].Gramms;
-      DayProductArray[Length(DayProductArray)-1].Fats:=
-        CarbonsProductArray[lstCarbons.ItemIndex].Fats *
-        DayProductArray[Length(DayProductArray)-1].Gramms;
-      DayProductArray[Length(DayProductArray)-1].Cals :=
-        CarbonsProductArray[lstCarbons.ItemIndex].Cals *
-        DayProductArray[Length(DayProductArray)-1].Gramms;
-      // Изменение значений, которые есть в списке
-      if ProductCount > 1 then
-      begin
-        LastAddProduct:=DayProductArray[Length(DayProductArray)-1].Carbons;
-        ProductLastVestige:= SelectedUserCarbons - LastAddProduct;
-        for I := 0 to Length( DayProductArray ) - 2 do
+            CarbonsProductArray[lstCarbons.ItemIndex].Carbons *
+            DayProductArray[Length(DayProductArray)-1].Gramms;
+          DayProductArray[Length(DayProductArray)-1].Fats:=
+            CarbonsProductArray[lstCarbons.ItemIndex].Fats *
+            DayProductArray[Length(DayProductArray)-1].Gramms;
+          DayProductArray[Length(DayProductArray)-1].Cals :=
+            CarbonsProductArray[lstCarbons.ItemIndex].Cals *
+            DayProductArray[Length(DayProductArray)-1].Gramms;
+          // Изменение значений, которые есть в списке
+          if ProductCount > 1 then
+          begin
+            LastAddProduct:=DayProductArray[Length(DayProductArray)-1].Carbons;
+            ProductLastVestige:= SelectedUserCarbons - LastAddProduct;
+            for I := 0 to Length( DayProductArray ) - 2 do
+            begin
+              DayProductArray[i].Carbons:=
+                (ProductLastVestige * DayProductArray[i].Carbons)/ SelectedUserCarbons;
+              DayProductArray[i].Gramms:=
+                (ProductLastVestige * DayProductArray[i].Gramms)/ SelectedUserCarbons;
+              DayProductArray[i].Prots:=
+                (ProductLastVestige * DayProductArray[i].Prots)/ SelectedUserCarbons;
+              DayProductArray[i].Fats:=
+                (ProductLastVestige * DayProductArray[i].Fats)/ SelectedUserCarbons;
+              DayProductArray[i].Cals:=
+                (ProductLastVestige * DayProductArray[i].Cals)/ SelectedUserCarbons;
+            end;
+          end;
+        end
+      else
+        // если не заполнено то проверяем остаток
         begin
-          DayProductArray[i].Carbons:=
-          (ProductLastVestige * DayProductArray[i].Carbons)/ SelectedUserCarbons;
-          DayProductArray[i].Gramms:=
-          (ProductLastVestige * DayProductArray[i].Gramms)/ SelectedUserCarbons;
-          DayProductArray[i].Prots:=
-          (ProductLastVestige * DayProductArray[i].Prots)/ SelectedUserCarbons;
-          DayProductArray[i].Fats:=
-          (ProductLastVestige * DayProductArray[i].Fats)/ SelectedUserCarbons;
-          DayProductArray[i].Cals:=
-          (ProductLastVestige * DayProductArray[i].Cals)/ SelectedUserCarbons;
+          //FindCarbonsVestige(SumProductWeigth)
+          // обработка случая, если есть некоторый остаток
         end;
-      end;
+
+
       // Запись в эдиты полученных значений
       seGramms.Text:= FloatToStr(DayProductArray[Length(DayProductArray)-1].Gramms);
       seProts.Text:=FloatToStr(DayProductArray[Length(DayProductArray)-1].Prots );
@@ -380,106 +385,20 @@ begin
 end;
 
 procedure TCalculateForm.btnAddFatsClick(Sender: TObject);
-var
-  ProductCount: Integer;
-  i: Integer;
-  ProductLastVestige: Real;
-  LastAddProduct: Real;
-  EditedProductValue: Real;
-  SumProductWeigth: Real;
-
-  // промежуточные флаги
-  FIFFlag: Boolean;
-  FIV: Real;
 begin
   if (lstFats.ItemIndex>-1) and (SelectedUserID <> -1) then
   begin
-
     if not CheckIdInArray(FatsProductArray[lstFats.ItemIndex].ID) then
-    begin
-      AddProductToDayMenu(FatsProductArray, lstFats);
-      ProductCount:= Length( DayProductArray );
-      FIFFlag:= FatsIsFull(SumProductWeigth);
-      if not FatsIsFull(SumProductWeigth) then
-        //если не заполнено все, то вычисляем остаток и n-ую часть
-        begin
-          // Определяем количество добавляемых углеводов
-          FIV:= FindFatsVestige(SumProductWeigth);
-          if FindFatsVestige(SumProductWeigth) >= CalculateFatNPortion(ProductCount) then
-            DayProductArray[Length(DayProductArray)-1].Fats:=
-              FindFatsVestige(SumProductWeigth)
-          else
-            DayProductArray[Length(DayProductArray)-1].Fats:=
-              CalculateFatNPortion(ProductCount);
-        end
-        // Вычисляем при полноте
-      else
-        // если заполнено то n-ую часть
-        begin
-          DayProductArray[Length(DayProductArray)-1].Fats:=
-            CalculateFatNPortion(ProductCount);
-        end;
-      DayProductArray[Length(DayProductArray)-1].Gramms:=
-        DayProductArray[Length(DayProductArray)-1].Fats /
-        FatsProductArray[lstFats.ItemIndex].Fats;
-
-      DayProductArray[Length(DayProductArray)-1].Prots:=
-        FatsProductArray[lstFats.ItemIndex].Prots *
-        DayProductArray[Length(DayProductArray)-1].Gramms;
-      DayProductArray[Length(DayProductArray)-1].Carbons:=
-        FatsProductArray[lstFats.ItemIndex].Carbons *
-        DayProductArray[Length(DayProductArray)-1].Gramms;
-      DayProductArray[Length(DayProductArray)-1].Cals :=
-        FatsProductArray[lstFats.ItemIndex].Cals *
-        DayProductArray[Length(DayProductArray)-1].Gramms;
-      //if True then
-
-      // Изменение значений, которые есть в списке
-      if ProductCount > 1 then
-      begin
-        LastAddProduct:=DayProductArray[Length(DayProductArray)-1].Fats;
-        ProductLastVestige:= SelectedUserFats - LastAddProduct;
-        for I := 0 to Length( DayProductArray ) - 2 do
-        begin
-          DayProductArray[i].Carbons:=
-            (ProductLastVestige * DayProductArray[i].Carbons)/ SelectedUserFats;
-          DayProductArray[i].Gramms:=
-            (ProductLastVestige * DayProductArray[i].Gramms)/ SelectedUserFats;
-          DayProductArray[i].Prots:=
-            (ProductLastVestige * DayProductArray[i].Prots)/ SelectedUserFats;
-          DayProductArray[i].Fats:=
-            (ProductLastVestige * DayProductArray[i].Fats)/ SelectedUserFats;
-          DayProductArray[i].Cals:=
-            (ProductLastVestige * DayProductArray[i].Cals)/ SelectedUserFats;
-        end;
-      end;
-      // Запись в эдиты полученных значений
-      seGramms.Text:= FloatToStr(DayProductArray[Length(DayProductArray)-1].Gramms);
-      seProts.Text:=FloatToStr(DayProductArray[Length(DayProductArray)-1].Prots );
-      seCarbons.Text:=FloatToStr(DayProductArray[Length(DayProductArray)-1].Carbons );
-      seFats.Text:=FloatToStr(DayProductArray[Length(DayProductArray)-1].Fats );
-    end;
-    UpdateDiagrams;
+    AddProductToDayMenu(FatsProductArray, lstFats);
   end;
 end;
 
 procedure TCalculateForm.btnAddProtClick(Sender: TObject);
-var
-  ProductCount: Integer;
-  i: Integer;
-  ProductCurrentValue: Real;
-  ProductLastVestige: Real;
-  LastAddProduct: Real;
-  EditedProductValue: Real;
-  SumProductWeigth: Real;
 begin
   if (lstProteins.ItemIndex>-1) and (SelectedUserID <> -1) then
   begin
     if not CheckIdInArray(ProtsProductArray[lstProteins.ItemIndex].ID) then
-    begin
-      AddProductToDayMenu(ProtsProductArray, lstProteins);
-    end;
-
+    AddProductToDayMenu(ProtsProductArray, lstProteins);
   end;
 end;
 
