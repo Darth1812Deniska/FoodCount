@@ -1,20 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.896,C:\Users\den93\Documents\foodcount\Unit1.pas=C:\Users\den93\Documents\foodcount\AddFood.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.521,=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.846,C:\Users\den93\Documents\foodcount\CalcUnit.dfm=C:\Users\den93\Documents\foodcount\Unit1.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.980,=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.563,C:\Users\den93\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.410,C:\Users\den93\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\FoodCount.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.896,C:\Users\den93\Documents\foodcount\Unit1.dfm=C:\Users\den93\Documents\foodcount\AddFood.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.497,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.dfm=C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\AddUser.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.497,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.pas=C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\AddUser.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.893,=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.846,C:\Users\den93\Documents\foodcount\CalcUnit.pas=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.563,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.pas=C:\Users\den93\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.497,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\AddUser.dfm=C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.896,C:\Users\den93\Documents\foodcount\AddFood.dfm=C:\Users\den93\Documents\foodcount\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.497,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\AddUser.pas=C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.410,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\FoodCount.dproj=C:\Users\den93\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.896,C:\Users\den93\Documents\foodcount\AddFood.pas=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.563,C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.dfm=C:\Users\den93\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.036,=C:\Users\den93\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.563,C:\Users\den93\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\den93\Documents\Embarcadero\Studio\Projects\foodcount\main.pas</Transaction>
-    <Transaction>2017.05.23 14:36:37.893,=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
-    <Transaction>2017.05.23 14:37:29.549,C:\Users\den93\Documents\foodcount\MainUnit.dfm=C:\Users\den93\Documents\foodcount\Unit1.dfm</Transaction>
-    <Transaction>2017.05.23 14:37:29.549,C:\Users\den93\Documents\foodcount\MainUnit.pas=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
-    <Transaction>2017.05.23 15:16:41.521,=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
-    <Transaction>2017.05.23 15:17:27.355,C:\Users\den93\Documents\foodcount\AddGroupFood.dfm=C:\Users\den93\Documents\foodcount\Unit1.dfm</Transaction>
-    <Transaction>2017.05.23 15:17:27.355,C:\Users\den93\Documents\foodcount\AddGroupFood.pas=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.355,C:\Users\den93\Documents\foodcount\Unit1.dfm=C:\Users\den93\Documents\foodcount\AddGroupFood.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.549,C:\Users\den93\Documents\foodcount\Unit1.pas=C:\Users\den93\Documents\foodcount\MainUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.355,C:\Users\den93\Documents\foodcount\Unit1.pas=C:\Users\den93\Documents\foodcount\AddGroupFood.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.549,C:\Users\den93\Documents\foodcount\Unit1.dfm=C:\Users\den93\Documents\foodcount\MainUnit.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.007,=C:\Users\den93\Documents\foodcount\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>

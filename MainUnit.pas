@@ -5,17 +5,19 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.StdCtrls, AddUser, AddFood,   AddGroupFood;
+  Vcl.StdCtrls, AddUser, AddFood, CalcUnit,   AddGroupFood;
 
 type
   TMainForm = class(TForm)
     btnAddUser: TButton;
     btnAddFoodGroup: TButton;
     btnAddFood: TButton;
+    btnCalcul: TButton;
     procedure btnAddUserClick(Sender: TObject);
     procedure btnAddFoodClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnAddFoodGroupClick(Sender: TObject);
+    procedure btnCalculClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,6 +46,11 @@ begin
   AddUserForm.ShowModal;
 end;
 
+procedure TMainForm.btnCalculClick(Sender: TObject);
+begin
+  CalculateForm.ShowModal;
+end;
+
 procedure TMainForm.FormShow(Sender: TObject);
 var
   iMidWidth:Integer;
@@ -56,6 +63,7 @@ begin
   btnAddUser.Left:= iBtnLeft;
   btnAddFood.Left:= iBtnLeft;
   btnAddFoodGroup.Left:= iBtnLeft;
+  btnCalcul.Left:=iBtnLeft;
 end;
 
 end.
